@@ -7,10 +7,14 @@ export const personalInfo = {
   description: 'Building clean, scalable web applications and exploring AI-powered solutions with a focus on RAG, NLP, and conversational systems.',
   email: 'theadityayadav107@gmail.com',
   location: 'Kolkata, India',
+  timezone: 'Asia/Kolkata',
+  status: 'Open to work',
+  statusDetail: 'internships & collaborations',
   github: 'https://github.com/adineo-cmd',
   linkedin: 'https://linkedin.com/in/aditya-yadav-cmd',
   leetcode: null,
-  resumeUrl: '/Resume.pdf'
+  resumeUrl: '/Resume.pdf',
+  monogram: 'ay'
 };
 
 export const aboutText = `Full-stack developer with a strong foundation in Python, experienced in frontend frameworks (React, Astro, Angular) and backend systems (Node.js, FastAPI). Actively building real-world projects involving AI/ML (NLP, transformer models, RAG concepts), responsive UIs, and cloud-native architectures. Passionate about open-source contribution and creating user-centric, scalable applications.`;
@@ -48,13 +52,13 @@ export const education = [
 ];
 
 export const skills = {
-  'AI/ML': ['TensorFlow', 'PyTorch', 'Pandas', 'OpenCV', 'NLP', 'Deep Learning', 'RAG (conceptual)', 'Transformer Models'],
-  'Languages': ['Python', 'TypeScript', 'JavaScript', 'Java', 'C', 'SQL'],
-  'Frontend': ['Astro', 'React', 'Angular', 'Tailwind CSS', 'HTML', 'CSS'],
-  'Backend': ['Node.js', 'FastAPI', 'Django', 'Express.js', 'REST API', 'Flask'],
-  'Databases': ['MongoDB', 'MySQL', 'PostgreSQL', 'Oracle Database'],
-  'Cloud & DevOps': ['AWS', 'Google Cloud Platform (GCP)', 'Docker', 'Kubernetes', 'Firebase', 'GitHub Actions', 'CI/CD'],
-  'Tools': ['Git', 'GitHub', 'Vim', 'Linux', 'Ubuntu', 'Windows', 'VS Code']
+  'ai-ml': ['TensorFlow', 'PyTorch', 'Pandas', 'OpenCV', 'NLP', 'Deep Learning', 'RAG (conceptual)', 'Transformer Models'],
+  'languages': ['Python', 'TypeScript', 'JavaScript', 'Java', 'C', 'SQL'],
+  'frontend': ['Astro', 'React', 'Angular', 'Tailwind CSS', 'HTML', 'CSS'],
+  'backend': ['Node.js', 'FastAPI', 'Django', 'Express.js', 'REST API', 'Flask'],
+  'databases': ['MongoDB', 'MySQL', 'PostgreSQL', 'Oracle Database'],
+  'cloud-devops': ['AWS', 'Google Cloud Platform (GCP)', 'Docker', 'Kubernetes', 'Firebase', 'GitHub Actions', 'CI/CD'],
+  'tools': ['Git', 'GitHub', 'Vim', 'Linux', 'Ubuntu', 'Windows', 'VS Code']
 };
 
 export const projects = [
@@ -86,3 +90,8 @@ export const projects = [
     featured: true
   }
 ];
+
+export const quote = {
+  text: 'Simplicity is the soul of efficiency.',
+  author: 'Austin Freeman'
+};

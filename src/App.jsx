@@ -1,84 +1,73 @@
-// src/App.jsx - Main application with routing
-import React, { useState, useEffect } from 'react';
-import Navigation from './components/Navigation';
-import Hero from './components/Hero';
-import About from './components/About';
-import ExperienceEducation from './components/ExperienceEducation';
-import Projects from './components/Projects';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
+// src/App.jsx — single-column minimal layout
+import { useCallback, useEffect, useState } from 'react';
+import Header from './components/Header';
+import Currently from './components/Currently';
+import Widgets from './components/Widgets';
+import ProjectsList from './components/ProjectsList';
+import SearchBar from './components/SearchBar';
+import EducationCertifications from './components/EducationCertifications';
+import TechStack from './components/TechStack';
+import SiteFooter from './components/SiteFooter';
+import CommandPalette from './components/CommandPalette';
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [activeSection, setActiveSection] = useState('home');
-
-  // Unified navigation handler — only supports 'home' now
-  const navigateToPage = (page) => {
-    if (page === 'home') {
-      setCurrentPage('home');
-      window.scrollTo(0, 0);
-      window.history.pushState({}, '', '/');
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    try {
+      return localStorage.getItem('theme') === 'light' ? 'light' : 'dark';
+    } catch {
+      return 'dark';
     }
-  };
+  });
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  // Scroll detection for home page sections
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'experience-education', 'projects', 'contact'];
-      const scrollPosition = window.scrollY + 150;
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem('theme', theme);
+    } catch {
+      /* storage unavailable */
+    }
+  }, [theme]);
 
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+  const toggleTheme = useCallback(() => {
+    setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
   }, []);
 
-  // Handle browser back/forward — always go to home
+  const openPalette = useCallback(() => setPaletteOpen(true), []);
+  const closePalette = useCallback(() => setPaletteOpen(false), []);
+
+  // Ctrl/Cmd + K opens the command palette from anywhere
   useEffect(() => {
-    const handlePopState = () => {
-      const path = window.location.pathname;
-      if (path === '/' || path === '') {
-        setCurrentPage('home');
-      } else {
-        // Redirect any non-root path back to home
-        window.history.replaceState({}, '', '/');
-        setCurrentPage('home');
+    const onKey = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setPaletteOpen((o) => !o);
       }
     };
-
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, []);
 
-  // Only render the home page
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-400" style={{ fontFamily: 'monospace' }}>
-      <Navigation 
-        activeSection={activeSection} 
-        onNavigate={scrollToSection} 
-      />
-      <Hero onNavigate={scrollToSection} />
-      <About />
-      <ExperienceEducation />
-      <Projects />
-      <Contact />
-      <Footer />
+    <div className="mx-auto w-full max-w-[680px] px-6">
+      <Header />
+      <Currently />
+      <Widgets />
+      <ProjectsList />
+      <div className="py-4">
+        <SearchBar onOpen={openPalette} theme={theme} onToggleTheme={toggleTheme} />
+      </div>
+      <EducationCertifications />
+      <TechStack />
+      <SiteFooter />
+      {paletteOpen && (
+        <CommandPalette
+          open
+          onClose={closePalette}
+          theme={theme}
+          onToggleTheme={toggleTheme}
+        />
+      )}
     </div>
   );
 }

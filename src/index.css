@@ -2,22 +2,118 @@
 @tailwind components;
 @tailwind utilities;
 
+:root,
+[data-theme='dark'] {
+  --ink: #0d0d0c;
+  --card: #141412;
+  --card-hover: #1a1a17;
+  --line: #232320;
+  --text-soft: #e8e6df;
+  --text-muted: #a3a098;
+  --text-faint: #6f6d66;
+  --accent: #e05a2b;
+  --glow: rgba(224, 90, 43, 0.06);
+}
+
+[data-theme='light'] {
+  --ink: #faf9f7;
+  --card: #ffffff;
+  --card-hover: #f3f1ec;
+  --line: #e7e4dd;
+  --text-soft: #211f1c;
+  --text-muted: #57544d;
+  --text-faint: #8b877e;
+  --accent: #cf4c1f;
+  --glow: rgba(207, 76, 31, 0.05);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  background-color: #09090b;
-  color: #a1a1aa;
-  font-family: 'Courier New', Courier, monospace;
-}
-
 html {
   scroll-behavior: smooth;
 }
 
+body {
+  background-color: var(--ink);
+  color: var(--text-muted);
+  font-family: 'Geist', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  min-height: 100vh;
+}
+
+/* Soft warm glow anchoring the bottom of the page */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(640px 320px at 50% 100%, var(--glow), transparent 70%);
+  z-index: -1;
+}
+
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
 #root {
   min-height: 100vh;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.25;
+    transform: scale(1.9);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.18s ease-out both;
+}
+
+.pulse-dot {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+@layer components {
+  .link {
+    @apply text-[12.5px] text-soft underline decoration-line underline-offset-4 transition-colors hover:text-accent hover:decoration-accent;
+  }
+
+  .pill {
+    @apply inline-flex shrink-0 items-center rounded-full border border-line bg-card px-2 py-[3px] text-[9.5px] font-medium uppercase tracking-[0.09em] text-faint;
+  }
+
+  .kbd {
+    @apply inline-flex items-center rounded-[5px] border border-line bg-card px-1.5 py-[3px] font-sans text-[10px] font-medium leading-none text-faint;
+  }
+
+  .widget-label {
+    @apply text-[9.5px] font-medium uppercase tracking-[0.14em] text-faint;
+  }
+
+  .section-label {
+    @apply text-[12.5px] text-faint;
+  }
 }

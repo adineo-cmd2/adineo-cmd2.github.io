@@ -1,11 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Fullstack developer with a strong foundation in react and AI & ML specialist." />
-    <title>Aditya Yadav | Full-Stack Developer / AI & ML Engineer</title>
+    <meta name="description" content="Aditya Yadav — Full-Stack Developer & AI/ML Engineer. Building clean, scalable web applications and exploring AI-powered solutions with a focus on RAG, NLP, and conversational systems." />
+    <meta property="og:title" content="Aditya Yadav — Full-Stack Developer & AI/ML Engineer" />
+    <meta property="og:description" content="Building clean, scalable web applications and exploring AI-powered solutions with a focus on RAG, NLP, and conversational systems." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://adineo-cmd2.github.io/" />
+    <title>Aditya Yadav — Full-Stack Developer &amp; AI/ML Engineer</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/style.css" />
+    <script>
+      // Apply the saved theme before first paint to avoid a flash
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
